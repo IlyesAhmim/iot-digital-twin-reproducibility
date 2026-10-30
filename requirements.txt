@@ -1,0 +1,7 @@
+# Tested direct dependencies; use requirements-lock.txt for the full environment.
+# Tested with Python 3.12 on Linux.
+numpy==2.3.5
+scipy==1.18.1
+matplotlib==3.11.2
+cbor2==6.1.5
+cryptography==50.0.2

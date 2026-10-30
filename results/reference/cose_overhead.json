@@ -1,0 +1,11 @@
+{
+ "C0_plain_CBOR_bytes": 23,
+ "C1_COSE_Sign1_EdDSA_bytes": 100,
+ "C1_COSE_Sign1_ES256_bytes": 100,
+ "C1_COSE_Mac0_HMAC256_64_bytes": 43,
+ "overhead_EdDSA_bytes": 77,
+ "overhead_ES256_bytes": 77,
+ "overhead_HMAC_bytes": 20,
+ "host_EdDSA_sign_us": 26.7,
+ "host_EdDSA_verify_us": 86.3
+}
