@@ -1,0 +1,6 @@
+algorithm,COSE_algorithm,payload_bytes,signature_bytes,object_bytes,overhead_bytes,method
+Ed25519,-8,23,64,100,77,CBOR_encoding_fixed_length_placeholder_signature
+ES256,-7,23,64,100,77,CBOR_encoding_fixed_length_placeholder_signature
+ML-DSA-44,-48,23,2420,2458,2435,CBOR_encoding_fixed_length_placeholder_signature
+ML-DSA-65,-49,23,3309,3347,3324,CBOR_encoding_fixed_length_placeholder_signature
+ML-DSA-87,-50,23,4627,4665,4642,CBOR_encoding_fixed_length_placeholder_signature

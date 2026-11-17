@@ -1,0 +1,9 @@
+{
+  "checked_C3_runs": {
+    "simulation_runs.csv": 120,
+    "sensitivity_runs.csv": 810
+  },
+  "comparison_tolerance": 1e-12,
+  "changed_metrics": [],
+  "other_configurations": "C0-C2 cannot execute the corrected C3 current-consistency branch."
+}

@@ -1,0 +1,37 @@
+\section{Simulation Model and Parameters}\label{app:sim}
+
+\begin{table}[ht]
+\caption{Parameters of the Simulation}\label{tab:simparams}
+\scriptsize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\columnwidth}{@{}YQ{3.3cm}@{}}
+\toprule
+Parameter & Value \\
+\midrule
+\grouprow{2}{Scenario and process}
+Run length; sensor and current reporting period & 600\,s; 0.5\,s \\
+Freshness bound $D$ & 2\,s \\
+Gateway compromise; attack window & 100\,s; 200-450\,s \\
+Degradation onset; vibration slope; stop threshold & 300\,s; 0.1\,mm/s per s; 4.5\,mm/s \\
+Normal vibration velocity; measurement noise (standard deviation) & 2.0\,mm/s; 0.10\,mm/s \\
+Spindle current at normal vibration; coupling; noise (standard deviation) & 5.0\,A; 0.8\,A per mm/s; 0.05\,A \\
+\grouprow{2}{Network and clocks}
+Loss probability per update (field link and current path) & 1\% \\
+Field-link delay & 5\,ms + log-normal (median 10\,ms, $\sigma = 0.5$) \\
+Gateway-to-twin delay & 10\,ms + log-normal (median 10\,ms, $\sigma = 0.5$) \\
+Clock offsets of sensor and gateway & uniform in $\pm 5$\,ms \\
+\grouprow{2}{Attack, detection, and runs}
+Injected delay (delay attack) & 8\,s \\
+Residual window; alarm threshold (C3) & 10 samples; 5 nominal standard errors \\
+Hold period for recovery time I10 & 5\,s \\
+Seeds per attack and configuration; false-alarm run & 30; 10\,h without attack or degradation \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+
+The simulation of Section VIII-F of the manuscript is a discrete-event model written in Python. Table~\ref{tab:simparams} lists its parameters. Network delays follow a constant plus a log-normal term on the field link (sensor to gateway) and on the path from the gateway to the twin; the latter is first-in first-out, as over a TCP connection. Sensor and gateway clocks have constant offsets drawn uniformly within $\pm 5$\,ms of the twin clock. In C0, the gateway stamps an update when it receives it from the sensor; under attack, it stamps the update when it forwards it, which hides the delay or the replay. In C1-C3, the source signature covers the sequence number, the generation timestamp, and the value, so a rewritten timestamp invalidates the signature and a non-increasing sequence number is rejected. The default simulation compares measured age directly with $D$; a supplementary check adds the known 5\,ms clock margin of the conservative freshness test in the manuscript. The residual of C3 compares the measured vibration with the vibration predicted from the spindle current through the linear coupling of the model. The code also contains the closed-form CoAP analysis and its Monte Carlo check (Section VII-B of the manuscript) and the computation of COSE message sizes (Section V-B of the manuscript).
+
+
+
+
+

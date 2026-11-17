@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this code or its generated data, please cite this software and the associated manuscript listed in README.md."
+type: software
+title: "Reproducibility code for Synchronization Assurance for IoT-Enabled Digital Twins"
+authors:
+  - family-names: Ahmim
+    given-names: Ilyes
+  - family-names: Rachedi
+    given-names: Abderrezak
+abstract: "Closed-form CoAP timeliness analysis, manufacturing-cell digital-twin simulation, and COSE message-overhead computation accompanying the submitted manuscript."
+keywords:
+  - Internet of Things
+  - digital twins
+  - synchronization
+  - security
+  - reproducibility
+repository-code: "https://github.com/IlyesAhmim/iot-digital-twin-reproducibility"

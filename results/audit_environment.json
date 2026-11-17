@@ -1,0 +1,16 @@
+{
+  "audit_date": "2026-11-05",
+  "python": "3.12.14",
+  "packages": {
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "matplotlib": "3.11.2",
+    "cbor2": "6.2.0.post2",
+    "cryptography": "50.0.2"
+  },
+  "original_runs": 480,
+  "sensitivity_runs": 1470,
+  "coap_max_mc_absolute_error": 0.0021100000000000008,
+  "inference_unit": "independent seed within scenario; configurations paired by seed",
+  "original_source_sha256": "f7e5c7913ac488a266b7eca22b748d7b75bff19c9f6518d9c9530d562e28ba37"
+}

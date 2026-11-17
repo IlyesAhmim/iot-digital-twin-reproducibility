@@ -23,8 +23,8 @@ Matplotlib 3.11.2, cbor2 6.1.5 and cryptography 50.0.2.
 
 Reference checks establish reproduction of the supplied supplementary results.
 They are not an independent scientific validation of the model assumptions or a
-hardware experiment. The relevant manuscript equation, Table 12, Figure 5 and
-Appendix B were inspected to establish the documentation mapping.
+hardware experiment. The final manuscript mapping is Eq. (2), Table XII, Figure 7 and
+Appendix A; the detailed parameter table is supplementary Table 1.
 
 Host cryptographic timings are deliberately excluded from equality checks. Their
 values depend on the execution machine and are not constrained-device measurements.
@@ -42,3 +42,17 @@ The runner writes fresh logs, environment metadata and a machine-readable
 verification report into `results/reproduced/` on each successful execution.
 That directory is intentionally excluded from Git; the reference outputs and
 this record are included.
+
+## Independent audit update: 5 November 2026
+
+The full reproduction was executed again, and all 480 original simulation rows,
+51 analytical CoAP rows, summary cells, classical message sizes and table fragment
+still match. Optional clock-margin and intact-signature replay controls were added
+without changing defaults. The former log rounded the maximum Monte Carlo error
+.002110 to .0021; six-decimal logging and a .0022 verification bound now avoid this
+rounding error. This supersedes the numerical precision claim above, not the
+archived probability values. The original record above is preserved as history.
+
+Actual run versions are in `../requirements-audit-lock.txt`, execution output in
+`../../reports/reproduction_execution.log`, and detailed scientific checks in
+`../../reports/simulation_validation.md` and `../../reports/math_audit.md`.

@@ -1,16 +1,17 @@
-# Local environments, caches and regenerated outputs
+# Local environments, generated duplicates and credentials
 .venv/
 venv/
 __pycache__/
 *.py[cod]
 .pytest_cache/
 .matplotlib/
-.DS_Store
-Thumbs.db
-results/reproduced/
-
-# Local credentials and editor files
 .env
 .env.*
+.aws/
+.codex/
 .idea/
 .vscode/
+.DS_Store
+Thumbs.db
+iot-digital-twin-reproducibility-main/results/reproduced/
+# Keep results/, reference data and reports tracked.

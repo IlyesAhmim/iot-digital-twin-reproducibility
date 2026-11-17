@@ -1,0 +1,32 @@
+{
+  "csv_rows": {
+    "baseline": 480,
+    "sensitivity": 1470
+  },
+  "independent_recomputation": "all Student-t summaries and paired CI values passed 1e-10 checks; baseline file SHA-256 identical to archive",
+  "lost_current_uses": [
+    [
+      "none",
+      "C3",
+      11,
+      0.5458699724647105,
+      0
+    ],
+    [
+      "none",
+      "C3",
+      15,
+      0.5610680721259497,
+      0
+    ],
+    [
+      "none",
+      "C3",
+      19,
+      0.5419460795038862,
+      0
+    ]
+  ],
+  "figure_seed_7_spoof_latency": 4.058824554089142,
+  "clock_guard_seed_2001_latency_change_s": -0.0049999999999954525
+}

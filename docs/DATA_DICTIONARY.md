@@ -28,7 +28,7 @@ One row per scenario/configuration/seed combination (480 rows).
 | `seed` | Actual integer seed passed to NumPy's random generator |
 | `I1_meas_mean`, `I1_meas_peak` | Mean/maximum age of held twin state computed from trusted timestamps (s) |
 | `age_true_mean`, `age_true_peak` | Mean/maximum age of the same state's true observation (s) |
-| `I2_meas`, `I2_true` | Fraction of applied updates missing freshness bound at reception, using trusted/true timestamps |
+| `I2_meas`, `I2_true` | Fraction of applied updates missing freshness bound at application (arrival plus 1 ms processing), using trusted/true timestamps |
 | `I3_apparent` | One minus number of applied updates divided by expected updates in the evaluation window |
 | `I3_true` | One minus number of genuine applied updates divided by expected updates in the evaluation window |
 | `I4` | Fraction of gateway-injected replay/delay messages applied; undefined when none are injected |
@@ -41,7 +41,7 @@ One row per scenario/configuration/seed combination (480 rows).
 | `action_cause` | `threshold`, `fail-safe`, or `none` |
 | `action_minus_tstar` | Protective action time minus `t_star` (s); negative means early |
 | `I7_rmse` | RMSE between held twin vibration and ground truth in [300, 450) s (mm/s) |
-| `I10` | Time after 450 s until the start of a continuous 5 s interval with measured state age <= 2 s |
+| `I10` | Time after 450 s until the start of 5 s of consecutive samples with measured state age <= D (D = 2 s by default; 0.01 s grid in the 600 s runs) |
 | `n_alerts` | Total alert events in the run; may count repeated consistency/update alarms |
 
 I1 and true-age statistics use the state on a 0.01 s grid over [200, 450) s.
@@ -71,7 +71,9 @@ Undefined values are `nan` in CSV and `NaN` in the original Python JSON encoding
 They must not be interpreted as zero. `sim_table.tex` renders selected means and
 fractions as rounded text for Table 12; it omits confidence intervals. The combined
 no-attack row uses C0 statistics, as in the original table-generation script;
-configuration-specific statistics remain available in the CSV and JSON files.
+configuration-specific statistics remain available in the CSV and JSON files. The
+revised manuscript explicitly shows C0/C1–C3 I1 as 0.28/0.29 s; the original
+reference table is retained for reproducibility.
 
 ## cose_overhead.json
 
@@ -85,3 +87,35 @@ Sizes exclude lower-layer headers and transport overhead.
 microseconds over 2,000 operations. They are machine-dependent and are not the
 paper's measurements of constrained devices. The reference values are retained
 only as part of the original output file and are excluded from verification.
+
+## Audit outputs in the parent manuscript's `results/`
+
+- `simulation_runs.csv`: exact copy of the newly reproduced original 480 rows.
+- `statistical_summary.csv`: run-level Student-t 95% intervals, sample SD, median
+  and empirical 95th percentile; Wilson intervals for runs with alerts.
+- `paired_comparisons.csv`: configuration contrasts computed within the same seed
+  before the Student-t interval; not independent-arm tests.
+- `sensitivity_runs.csv`: 1,470 executed additional runs. `family` identifies the
+  changed factor. `clock_margin_s=0` preserves the original policy; .005 implements
+  the conservative guard. `intact_replay` preserves the authentic source timestamp
+  and signature while replaying an old sequence. In normal-operation controls,
+  `degradation=False`; attack runs retain the original process trajectory.
+- `sensitivity_analysis.csv`: per-cell summaries. `correct_detection` requires an
+  attack-appropriate alarm within the attack window; `pre_onset_hold` separately
+  identifies holds before attack/degradation onset. `benign_run_alert` is defined
+  only for no-attack runs; true staleness due to benign loss is included, so it is
+  not necessarily a false freshness detection. Latencies exclude absent detection
+  and report the effective sample count. Empty CSV cells mean a field does not
+  apply to that row; `nan` means an undefined numeric quantity.
+- `coap_independent_checks.csv`: enumeration/quadrature and closed-form comparisons.
+- `coap_monte_carlo.csv`: unrounded original Monte Carlo check results.
+- `coap_correlated_loss_sensitivity.csv`: illustrative attempt-indexed stationary
+  two-state losses; conditional loss probabilities, exact and simulated outcomes.
+- `cose_extended_sizes.csv`: tagged COSE encoding with fixed-length placeholder
+  signatures, including ML-DSA; confirms serialization sizes, not PQ signing.
+- `clock_bound_check.json`: numerical sanity check of the proved clock inequality.
+- `audit_environment.json`: actual versions, counts and original CSV hash.
+
+Intervals are marginal, not simultaneous. The unit of replication is a seed/run,
+not a time-grid sample or residual window. These intervals quantify Monte Carlo
+variation conditional on the stylized model; they do not establish field validity.

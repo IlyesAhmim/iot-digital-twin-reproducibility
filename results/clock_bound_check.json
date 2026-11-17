@@ -1,0 +1,9 @@
+{
+  "samples": 1000000,
+  "seed": 20261104,
+  "per_clock_error_s": 0.005,
+  "conservative_difference_bound_s": 0.01,
+  "accepted": 397683,
+  "false_fresh_acceptances": 0,
+  "interpretation": "Numerical sanity check; the algebraic proof, not sampling, establishes the guarantee."
+}

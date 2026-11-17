@@ -1,0 +1,11 @@
+\section{Proposed Testbed Protocol (Not Executed)}
+The following protocol is proposed to measure these effects on hardware and real networks, and to obtain the costs that the simulation cannot provide. The attack-injection logic of the released simulation can drive the replay module.
+\begin{itemize}
+\item \emph{Objective:} Measure how delay and replay injected in a sensor-gateway-broker-twin chain affect indicators I1-I6, I10, and I11, the change produced by each protection configuration, and its added cost.
+\item \emph{Testbed:} Constrained sensor nodes (physical or emulated), a gateway, an MQTT~5.0 broker and a twin service that maintains state from the telemetry. A network emulator injects delay, loss and reordering. A replay module on the gateway resends recorded payloads. Wired clock synchronization with PTP provides a measured clock-error bound for the age computation.
+\item \emph{Configurations:} C0: TLS only. C1: C0 plus source-side signatures with sequence numbers and timestamps. C2: C1 plus staleness-aware ingestion with bound $D$. C3: C2 plus a physical-consistency check using an independent signal.
+\item \emph{Factors:} Injected delay relative to $D$, replay rate, loss rate, update period and payload size.
+\item \emph{Measurements:} Indicators I1 (time-average and peak), I2, I3, I4, I5, I6, and I10, and the overhead I11 in message size, added latency, and CPU time and energy on the sensor node.
+\item \emph{Design and analysis:} Repeated randomized runs per condition, with confidence intervals for each indicator, ground-truth logs of injected events for I4 and I5, and a sensitivity analysis on $D$ and on the response policy (alarm only, fail-safe hold, degraded mode).
+\item \emph{Outputs and threats to validity:} The dataset and scripts would be deposited in a public repository alongside the simulation code. Threats to validity include emulation fidelity, the choice of injection models, and the representativeness of the signals.
+\end{itemize}
